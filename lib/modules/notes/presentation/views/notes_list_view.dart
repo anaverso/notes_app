@@ -19,9 +19,58 @@ class NotesListView extends StatelessWidget {
               itemCount: store.notes.length,
               itemBuilder: (context, index) {
                 final note = store.notes[index];
-                return NoteTile(note: note);
+
+                return Dismissible(
+                  key: Key(note.id.toString()),
+                  background: Container(
+                    color: Colors.red,
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: const Icon(Icons.delete, color: Colors.white),
+                  ),
+                  direction: DismissDirection.endToStart,
+                  confirmDismiss: (_) async {
+                    return await showDialog(
+                      context: context,
+                      builder:
+                          (context) => AlertDialog(
+                            title: const Text("Confirm Delete"),
+                            content: const Text(
+                              "Do you want to delete this note?",
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed:
+                                    () => Navigator.of(context).pop(false),
+                                child: const Text("Cancel"),
+                              ),
+                              TextButton(
+                                onPressed:
+                                    () => Navigator.of(context).pop(true),
+                                child: const Text(
+                                  "Delete",
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ),
+                            ],
+                          ),
+                    );
+                  },
+                  onDismissed: (_) async {
+                    await store.deleteNote(note);
+                  },
+                  child: NoteTile(note: note),
+                );
+                //return NoteTile(note: note);
               },
             ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Modular.to.pushNamed('/add');
+        },
+        tooltip: "Add note",
+        child: const Icon(Icons.add),
       ),
     );
   }

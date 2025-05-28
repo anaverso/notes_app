@@ -1,0 +1,52 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:notes_app/modules/notes/domain/entities/note_entity.dart';
+import 'package:notes_app/modules/notes/presentation/stores/note_store.dart';
+
+class AddNoteView extends StatefulWidget {
+  const AddNoteView({super.key});
+
+  @override
+  State<AddNoteView> createState() => _AddNoteViewState();
+}
+
+class _AddNoteViewState extends State<AddNoteView> {
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final noteStore = Modular.get<NoteStore>();
+
+  void _saveNote() {
+    final note = NoteEntity(
+      id: DateTime.now().millisecondsSinceEpoch,
+      title: titleController.text,
+      description: descriptionController.text,
+    );
+    noteStore.addNewNote(note).then((_) {
+      Modular.to.pop(); // Volta para lista
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Add Note')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(
+              controller: titleController,
+              decoration: const InputDecoration(labelText: 'Title'),
+            ),
+            TextField(
+              controller: descriptionController,
+              decoration: const InputDecoration(labelText: 'Description'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(onPressed: _saveNote, child: const Text('Save')),
+          ],
+        ),
+      ),
+    );
+  }
+}
