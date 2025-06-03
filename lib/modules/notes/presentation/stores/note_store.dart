@@ -35,6 +35,6 @@ abstract class _NoteStoreBase with Store {
   @action
   Future<void> deleteNote(NoteEntity note) async {
     await deleteNoteUsecase(note);
-    notes.removeWhere((n) => n.id == note.id);
+    await loadNotes();
   }
 }

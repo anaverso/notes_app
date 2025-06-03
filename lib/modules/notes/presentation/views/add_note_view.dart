@@ -15,15 +15,22 @@ class _AddNoteViewState extends State<AddNoteView> {
   final descriptionController = TextEditingController();
   final noteStore = Modular.get<NoteStore>();
 
-  void _saveNote() {
+  void _saveNote() async {
     final note = NoteEntity(
       id: DateTime.now().millisecondsSinceEpoch,
       title: titleController.text,
       description: descriptionController.text,
     );
-    noteStore.addNewNote(note).then((_) {
-      Modular.to.pop(); // Volta para lista
-    });
+
+    await noteStore.addNewNote(note);
+    Modular.to.pop();
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.dispose();
   }
 
   @override

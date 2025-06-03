@@ -19,11 +19,14 @@ import 'package:notes_app/common/resources/routes.dart';
 class AppModule extends Module {
   @override
   void binds(Injector i) {
+    // Data
     i.add<NoteDatasource>(NoteDatasourceImpl.new);
     i.add<NoteRepository>(NoteRepositoryImpl.new);
+    // Domain
     i.add<GetAllNotes>(GetAllNotesImpl.new);
     i.add<AddNote>(AddNoteImpl.new);
     i.add<DeleteNote>(DeleteNoteImpl.new);
+    // Presentation
     i.addSingleton(NoteStore.new);
   }
 
@@ -31,7 +34,7 @@ class AppModule extends Module {
   void routes(RouteManager r) {
     r
       ..child(Modular.initialRoute, child: (_) => NotesListView())
-      ..child('/add', child: (_) => const AddNoteView())
+      ..child(addNoteRoute, child: (_) => const AddNoteView())
       ..child(
         noteDetailRoute,
         child: (_) {

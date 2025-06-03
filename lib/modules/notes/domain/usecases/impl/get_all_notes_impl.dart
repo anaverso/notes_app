@@ -8,7 +8,5 @@ class GetAllNotesImpl implements GetAllNotes {
   GetAllNotesImpl(this.repository);
 
   @override
-  Future<List<NoteEntity>> call() {
-    return repository.getAllNotesEntity();
-  }
+  Future<List<NoteEntity>> call() => repository.getAllNotesEntity();
 }

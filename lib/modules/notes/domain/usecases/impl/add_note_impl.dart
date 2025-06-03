@@ -8,7 +8,5 @@ class AddNoteImpl implements AddNote {
   AddNoteImpl(this.repository);
 
   @override
-  Future<void> call(NoteEntity note) {
-    return repository.addNote(note);
-  }
+  Future<void> call(NoteEntity note) => repository.addNote(note);
 }
