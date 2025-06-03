@@ -1,16 +1,26 @@
-# notes_app
+# 📝 Notes App
 
-A new Flutter project.
+A simple notes application built with Flutter, using Clean Architecture, Flutter Modular, MobX and SharedPreferences.
 
-## Getting Started
+## 📱 Features
 
-This project is a starting point for a Flutter application.
+- Add, view and delete notes
+- Modular route navigation
+- Clean architecture (Domain, Data, and Presentation layers)
+- State management with MobX
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠 Technologies
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Flutter](https://flutter.dev/)
+- [Flutter Modular](https://pub.dev/packages/flutter_modular)
+- [MobX](https://pub.dev/packages/mobx)
+- [Shared Preferences](https://pub.dev/packages/shared_preferences)
+- Clean Architecture principles
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📲 Run the App
+
+```bash
+git clone https://github.com/anaverso/notes_app.git
+cd notes_app
+flutter pub get
+flutter run
