@@ -15,10 +15,10 @@ class _AddNoteViewState extends State<AddNoteView> {
   final noteStore = Modular.get<NoteStore>();
 
   void _saveNote() async {
-    noteStore.title = titleController.text;
-    noteStore.description = descriptionController.text;
-
-    await noteStore.addNewNote();
+    await noteStore.addNewNote(
+      titleController.text,
+      descriptionController.text,
+    );
     Modular.to.pop();
   }
 
