@@ -2,7 +2,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:notes_app/modules/notes/data/datasources/impl/note_datasource_impl.dart';
 import 'package:notes_app/modules/notes/data/datasources/note_datasource.dart';
 import 'package:notes_app/modules/notes/data/repositories/note_repository_impl.dart';
-import 'package:notes_app/modules/notes/domain/entities/note_entity.dart';
 import 'package:notes_app/modules/notes/domain/repositories/note_repository.dart';
 import 'package:notes_app/modules/notes/domain/usecases/add_note.dart';
 import 'package:notes_app/modules/notes/domain/usecases/delete_note.dart';
@@ -38,8 +37,7 @@ class AppModule extends Module {
       ..child(
         noteDetailRoute,
         child: (_) {
-          final note = r.args.data as NoteEntity;
-          return NoteDetailView(note: note);
+          return NoteDetailView(note: r.args.data);
         },
       );
   }

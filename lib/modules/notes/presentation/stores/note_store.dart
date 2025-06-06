@@ -21,14 +21,20 @@ abstract class _NoteStoreBase with Store {
   @observable
   ObservableList<NoteEntity> notes = ObservableList<NoteEntity>();
 
+  @observable
+  String title = "";
+
+  @observable
+  String description = "";
+
   @action
   Future<void> loadNotes() async {
     notes = ObservableList.of(await getAllNotes());
   }
 
   @action
-  Future<void> addNewNote(NoteEntity note) async {
-    await addNote(note);
+  Future<void> addNewNote() async {
+    await addNote(title, description);
     await loadNotes();
   }
 

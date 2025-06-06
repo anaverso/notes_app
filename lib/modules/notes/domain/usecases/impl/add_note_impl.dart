@@ -8,5 +8,12 @@ class AddNoteImpl implements AddNote {
   AddNoteImpl(this.repository);
 
   @override
-  Future<void> call(NoteEntity note) => repository.addNote(note);
+  Future<void> call(String title, String description) {
+    final noteEntity = NoteEntity(
+      id: DateTime.now().millisecondsSinceEpoch,
+      title: title,
+      description: description,
+    );
+    return repository.addNote(noteEntity);
+  }
 }

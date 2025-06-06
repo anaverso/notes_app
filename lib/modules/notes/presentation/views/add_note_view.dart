@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:notes_app/modules/notes/domain/entities/note_entity.dart';
 import 'package:notes_app/modules/notes/presentation/stores/note_store.dart';
 
 class AddNoteView extends StatefulWidget {
@@ -16,13 +15,10 @@ class _AddNoteViewState extends State<AddNoteView> {
   final noteStore = Modular.get<NoteStore>();
 
   void _saveNote() async {
-    final note = NoteEntity(
-      id: DateTime.now().millisecondsSinceEpoch,
-      title: titleController.text,
-      description: descriptionController.text,
-    );
+    noteStore.title = titleController.text;
+    noteStore.description = descriptionController.text;
 
-    await noteStore.addNewNote(note);
+    await noteStore.addNewNote();
     Modular.to.pop();
   }
 
